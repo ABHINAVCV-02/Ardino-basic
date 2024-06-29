@@ -1,0 +1,28 @@
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+
+char ssid[] = "Grp2";
+char pass[] = "12345678";
+char auth[] = "xpv0CSknEbfH9H_-pRLMv78JesGjI0IZ";
+
+int ledPin = 13; // Pin connected to the LED
+
+void setup()
+{
+    Serial.begin(9600);
+    Blynk.begin(xpv0CSknEbfH9H_-pRLMv78JesGjI0IZ, Grp2, 123456);
+    pinMode(ledPin, OUTPUT); // Set the LED pin as output
+}
+
+BLYNK_WRITE(V1) // Virtual pin V1 callback function
+{
+    int value = param.asInt(); // Get value from Blynk app (0 or 1)
+    digitalWrite(ledPin, value); // Turn LED on or off
+}
+
+void loop()
+{
+    Blynk.run();
+}
+
